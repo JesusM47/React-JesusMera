@@ -6,7 +6,7 @@ export const NavBar = () => {
 
     <>
     <header>
-        <h1>Tienda MKup</h1>
+        <h1>BookShop</h1>
 
         <nav>
             <ul>
