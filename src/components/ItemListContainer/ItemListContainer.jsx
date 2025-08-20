@@ -4,7 +4,7 @@ import { ItemList } from "../ItemList/ItemList"
 import { useParams } from "react-router-dom"
 
 
-export const ItemListContainer = () => {
+ const ItemListContainer = () => {
 
   const [libros, setLibros] = useState([])
 
@@ -15,12 +15,12 @@ export const ItemListContainer = () => {
     const funcionLibros = idCategoria ? getLibrosCategoria : getLibros
 
     funcionLibros(idCategoria)
-      .then(res => )
+      .then(res =>  setLibros(res))
 
     // getLibros()
     // .then (respusta => setLibros(respusta))
     // .catch(error => console.log(error))
-  },[])
+  },[idCategoria])
 
   console.log(libros)
 
@@ -34,3 +34,5 @@ export const ItemListContainer = () => {
 
   )
 }
+
+export default ItemListContainer
