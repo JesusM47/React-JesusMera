@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
+
 import { getLibros, getLibrosCategoria } from "../../asyncapi"
 import { ItemList } from "../ItemList/ItemList"
 import { useParams } from "react-router-dom"
+
 
 
  const ItemListContainer = () => {
@@ -24,13 +26,17 @@ import { useParams } from "react-router-dom"
 
   console.log(libros)
 
+  
 
   return (
+      <>
     
-     <div>
-      <h2 style={{ textAlign: "center"}}>Mis Libros</h2>
-      <ItemList libros={libros} />
-     </div>
+          <ItemList libros={libros} />
+       
+    
+     
+      
+     </>
 
   )
 }

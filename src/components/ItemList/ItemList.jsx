@@ -1,14 +1,20 @@
-import React from 'react'
+
 import { Item } from '../Item/Item'
+
+import ImageList from '@mui/material/ImageList';
+import Grid from '@mui/material/Grid';
 
 export const ItemList = ({libros}) => {
   return (
     
-    <div>
+    <>
 
-        {libros.map(item => <Item key={item.id} {...item} />)}
+    <ImageList sx={{ width: '100%', height: '100%' }} cols={6}>
+          {libros.map(item => <Item key={item.id} {...item} />)}
+    </ImageList>
+   
 
-    </div>
+    </>
     
   )
 }
