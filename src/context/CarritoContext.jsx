@@ -6,11 +6,15 @@ export const CarritoContext = createContext({
     cantidadTotal: 0
 })
 
-export const CarritoProvider = ({Children}) => {
+export const CarritoProvider = ({children}) => {
     //Creamos el estado para el carrito, total y cantidadTotal
     const [carrito, setCarrito] = useState([])
     const [total, setTotal] = useState(0)
     const [cantidadTotal, setCantidadTotal] = useState(0)
+
+    //Verificamos por consola el carrito
+
+    console.log(carrito)
 
     //agregar algunas funciones auxiliares para la logica del carrito
 
@@ -57,7 +61,7 @@ export const CarritoProvider = ({Children}) => {
 
     return(
         <CarritoContext.Provider value={{carrito, total, cantidadTotal, agregarAlCarrito, eliminarLibro, vaciarCarrito}}>
-            {Children}
+            {children}
         </CarritoContext.Provider>
     )
 }
