@@ -5,6 +5,7 @@ import { collection, addDoc } from "firebase/firestore"
 
 export const Checkout = () => {
 
+    
     const [nombre, setNombre] = useState("")
     const [apellido, setApellido] = useState("")
     const [telefono, setTelefono] = useState("")
@@ -15,12 +16,12 @@ export const Checkout = () => {
 
     const {carrito, vaciarCarrito, total, totalCantidad} = useContext(CarritoContext)
 
-    //Funciones y validacion
+    //Funciones y validación
 
     const manejadorFormulario = (event) => {
         event.preventDefault();
 
-        //Verificacion de campos vacios
+        //Verificación de campos vacíos
         if(!nombre || !apellido || !telefono || !email || !emailConfirm){
             setError("Por favor ingresa todos los campos")
             return
