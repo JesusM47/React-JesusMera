@@ -1,5 +1,7 @@
 import { useContext, useState } from "react"
 import { CarritoContext} from "../../context/CarritoContext"
+import { db } from "../../services/config"
+import { collection, addDoc } from "firebase/firestore"
 
 export const Checkout = () => {
 
@@ -27,7 +29,7 @@ export const Checkout = () => {
             setError("Los emails no coinciden")
             return
         }
-    }
+    
 
     //1.- Creamos un objeto con totdos los datos de la orden de compra
 
@@ -46,7 +48,16 @@ export const Checkout = () => {
     }
 
     //2.- Guardar la orden en la base de datos
-    addDoc(collection(db))
+    addDoc(collection(db, "ordenes"), orden)
+    .then(docRef => {
+        setOrdenId(docRef.id)
+        vaciarCarrito()
+    })
+    .catch(error => {
+        console.log("Error al crear la orden", error)
+        setError("Se produjo un error al crear la orden")
+    })
+    }
 
   return (
     <div>
@@ -68,7 +79,7 @@ export const Checkout = () => {
                 <input type="text" onChange={(e) => setApellido(e.target.value)}/>
             </div>
             <div>
-                <label htmlFor="">Telefono</label>
+                <label htmlFor="">Teléfono</label>
                 <input type="number" onChange={(e) => setTelefono(e.target.value)}/>
             </div>
             <div>
@@ -80,10 +91,10 @@ export const Checkout = () => {
                 <input type="email" onChange={(e) => setEmailConfirm(e.target.value)}/>
             </div>
             {
-                error && <p></p>
+                error && <p style={{color: "red"}}>{error}</p>
             }
 
-            <button>Confirmar Compra</button>
+            <button type="submit">Confirmar Compra</button>
             {
                 ordenId && (
                     <strong>Gracias por tu compra!! Tu numero de orden es: {ordenId}</strong>

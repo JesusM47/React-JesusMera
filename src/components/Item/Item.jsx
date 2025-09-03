@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 import './Item.css'
 
-export const Item = ({id, nombre, precio, foto}) => {
+export const Item = ({id, nombre, precio, foto, stock}) => {
   return (
     <>
     
@@ -20,18 +20,24 @@ export const Item = ({id, nombre, precio, foto}) => {
           />
           <ImageListItemBar 
             className="title"
-            title={nombre}
-            subtitle=
-            {<Typography sx={{ fontSize: "17px", fontWeight: "bold", color:"rgb(32, 137, 91)" }} component="span">
-            Precio: ${precio}
-            </Typography>}
-            position="below"
-          />
-           <Link to={`/item/${id}`}>
-        <Button size="small" color="primary">
+            title={ <Typography sx={{fontSize:"19px", fontWeight: "bold"}}> {nombre} </Typography>}
+            
+            subtitle={
+              <span>
+                { <Typography 
+                    sx={{ fontSize: "15px", fontWeight: "bold", color:"rgb(255, 255, 255)" }} component="span">
+                    Precio: ${precio} <br/>
+                  </Typography>}
+                
+                {stock && <><strong>Stock:</strong> {stock}</>} <br/>
+                {<Link to={`/item/${id}`}>
+        <Button size="small" sx={{ color:"rgb(68, 211, 255)" }}>
           Ver detalles
         </Button>
-        </Link>
+        </Link>}
+              </span>
+            }
+          />
         </ImageListItem>
         
       
