@@ -8,13 +8,22 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import { CarritoContext } from "../../context/CarritoContext";
+import { useContext } from "react";
+
 export const ItemDetail = ({id, nombre, precio , foto, author, stock}) => {
 
   const [agregarCantidad, setAgregarCantidad] = useState(0)
 
+  const {agregarAlCarrito} =useContext(CarritoContext)
+
   const manejadorCantidad = (cantidad) => {
     setAgregarCantidad(cantidad);
-    console.log("Productos agregados" + cantidad)
+    // console.log("Productos agregados" + cantidad)
+
+    //Ahora crear un objeto con el item y la cantidad
+    const item = {id,nombre,precio}
+    agregarAlCarrito(item, cantidad)
   }
 
   return (
