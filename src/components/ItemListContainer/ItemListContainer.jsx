@@ -8,10 +8,11 @@ import { collection, getDocs, query, where} from "firebase/firestore"
 
  const ItemListContainer = () => {
 
-  const [libros, setLibros] = useState([])
+  // const [libros, setLibros] = useState([])
 
-  const {idCategoria} = useParams()
+  // const {idCategoria} = useParams()
 
+<<<<<<< Updated upstream
 useEffect(() => {
   const misLibros = idCategoria 
     ? query(collection(db, "libros"), where("idCat", "==", idCategoria))
@@ -74,12 +75,35 @@ useEffect(() => {
      </>
   // return (
     
+=======
+  // useEffect(() => {
+
+  //   const funcionLibros = idCategoria ? getLibrosCategoria : getLibros
+
+  //   funcionLibros(idCategoria)
+  //     .then(res => () {})
+
+  //   // getLibros()
+  //   // .then (respusta => setLibros(respusta))
+  //   // .catch(error => console.log(error))
+  // },[])
+
+  // console.log(libros)
+
+
+  // return (
+    
+>>>>>>> Stashed changes
   //    <div>
   //     <h2 style={{ textAlign: "center"}}>Mis Libros</h2>
   //     <ItemList libros={libros} />
   //    </div>
 
   // )
+<<<<<<< Updated upstream
 )}
 
 export default ItemListContainer
+=======
+}
+>>>>>>> Stashed changes
