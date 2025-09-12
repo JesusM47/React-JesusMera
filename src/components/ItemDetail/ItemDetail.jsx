@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { Link } from "react-router-dom";
-import { ItemCount } from "../ItemCount.jsx/ItemCount";
+import { Link } from "react-router-dom"
+import { ItemCount } from "../ItemCount.jsx/ItemCount"
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -8,8 +8,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import { CarritoContext } from "../../context/CarritoContext";
-import { useContext } from "react";
+import { CarritoContext } from "../../context/CarritoContext"
+import { useContext } from 'react'
+import { toast } from 'react-toastify';
 
 export const ItemDetail = ({id, nombre, precio , foto, author, stock}) => {
 
@@ -23,13 +24,22 @@ export const ItemDetail = ({id, nombre, precio , foto, author, stock}) => {
 
     //Ahora crear un objeto con el item y la cantidad
     const item = {id,nombre,precio}
-    agregarAlCarrito(item, cantidad)
+    agregarAlCarrito(item, cantidad);
+    toast.success('Libro agregado al carrito',{ 
+      autoClose: 3000, 
+      position:"top-center", 
+      theme: "dark",
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined})
   }
 
   return (
-    <>
+    <div >
 
-
+{/* 
     <Card sx={{ maxWidth: 500, margin: 'auto' }}>
       <CardMedia
         component="img"
@@ -50,7 +60,7 @@ export const ItemDetail = ({id, nombre, precio , foto, author, stock}) => {
         <Button size="small">Share</Button>
         <Button size="small">Learn More</Button>
       </CardActions>
-    </Card>
+    </Card> */}
 
         <h2>Nombre: {nombre}</h2>
         <h3>Autor: {author}</h3>
@@ -63,6 +73,7 @@ export const ItemDetail = ({id, nombre, precio , foto, author, stock}) => {
         agregarCantidad > 0 ? (<Link to="/cart">Terminar Compra</Link>) : (<ItemCount inicial={1} stock={stock} funcionAgregar={manejadorCantidad}/>)
       }
 
-    </>
+
+    </div>
   )
 }

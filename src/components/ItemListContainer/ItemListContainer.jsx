@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom"
 
 import { db } from "../../services/config"
 import { collection,getDocs, query, where } from "firebase/firestore"
+import { Loader } from "../Loader/Loader"
 
 
 
@@ -13,9 +14,14 @@ import { collection,getDocs, query, where } from "firebase/firestore"
 
   const [libros, setLibros] = useState([])
 
+  const [loading, setLoading] = useState(false)
+
   const {idCategoria} = useParams()
 
   useEffect (() => {
+
+    setLoading(true)
+
     const misLibros = idCategoria ? query(collection(db, "libros"), where("genero", "==", idCategoria)) : collection(db, "libros")
 
     getDocs(misLibros)
@@ -27,6 +33,10 @@ import { collection,getDocs, query, where } from "firebase/firestore"
           setLibros(nuevosLibros)
       })
       .catch(error => console.log(error))
+      .finally(() => {
+        console.log("Proceso Terminado")
+        setLoading(false)
+      })
   },[idCategoria])
 
 
@@ -50,7 +60,8 @@ import { collection,getDocs, query, where } from "firebase/firestore"
   return (
       <>
     
-          <ItemList libros={libros} />
+          {loading ? <Loader /> : <ItemList libros={libros} /> }
+          
        
     
      

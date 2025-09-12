@@ -1,11 +1,12 @@
+//VERSION CON DESCUENTO DE STOCK
+
 import { useContext, useState } from "react"
 import { CarritoContext} from "../../context/CarritoContext"
 import { db } from "../../services/config"
-import { collection, addDoc } from "firebase/firestore"
+import { collection, addDoc, updateDoc, doc, getDoc } from "firebase/firestore"
 
 export const Checkout = () => {
 
-    
     const [nombre, setNombre] = useState("")
     const [apellido, setApellido] = useState("")
     const [telefono, setTelefono] = useState("")
@@ -13,12 +14,11 @@ export const Checkout = () => {
     const [emailConfirm, setEmailConfirm] = useState("")
     const [error, setError] = useState("")
     const [ordenId, setOrdenId] = useState("")
-
     const {carrito, vaciarCarrito, total, totalCantidad} = useContext(CarritoContext)
 
     //Funciones y validación
 
-    const manejadorFormulario = (event) => {
+        const manejadorFormulario = (event) => {
         event.preventDefault();
 
         //Verificación de campos vacíos
@@ -48,8 +48,26 @@ export const Checkout = () => {
         email
     }
 
-    //2.- Guardar la orden en la base de datos
-    addDoc(collection(db, "ordenes"), orden)
+    //Modificar el código para ejecutar varias promesas en paralelo, 1.-Actualizar el stock, 2.- Generar la orden de compra
+    //Promise.All
+    //2.- Guardar la orden en la base de datos: 
+    Promise.all(
+        orden.items.map( async (libroOrden) => {
+            const libroRef = doc(db, "libros", libroOrden.id)
+            //Por cada producto en la colección "productos" obtengo una referencia, y a partir de esa referencia obtengo el DOC 
+            const libroDoc = await getDoc(libroRef)
+            const stockActual = libroDoc.data().stock
+            //Data es un método que me permite acceder a la información del documento
+
+            await updateDoc ( libroRef, {
+                stock: stockActual - libroOrden.cantidad
+            })
+            //Modifico el stock y subo la información actualizada
+        })
+    )
+    .then(() => {
+        //Guardamos la orden en la base de datos
+        addDoc(collection(db, "ordenes"), orden)
     .then(docRef => {
         setOrdenId(docRef.id)
         vaciarCarrito()
@@ -58,6 +76,14 @@ export const Checkout = () => {
         console.log("Error al crear la orden", error)
         setError("Se produjo un error al crear la orden")
     })
+
+    })
+    .catch((error) => {
+        console.log("No se pudo actualizar el stock", error)
+        setError("No se puede actualizar el stock, intente en otra tienda")
+    })
+
+    
     }
 
   return (

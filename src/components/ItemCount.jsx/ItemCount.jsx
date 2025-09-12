@@ -17,7 +17,7 @@ export const ItemCount = ({inicial, stock, funcionAgregar}) => {
         }
     }
 
-    console.log(contador)
+    // console.log(contador)
 
   return (
 

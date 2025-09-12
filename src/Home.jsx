@@ -9,6 +9,8 @@ import { CarritoProvider } from './context/CarritoContext'
 import { CardItem } from './components/CardItem/CardItem'
 import { Cart } from './components/Cart/Cart'
 import { Checkout } from './components/Checkout/Checkout'
+import { ToastContainer } from 'react-toastify'
+import { Loader } from './components/Loader/Loader'
 
 const App = () => {
 
@@ -24,11 +26,13 @@ const App = () => {
       <Route path='/categoria/:idCategoria' element={<ItemListContainer />} />
       <Route path='item/:idItem' element={<ItemDetailContainer/>}/>
       <Route path='/cart' element={<Cart />} />
+      <Route path='/loader' element={<Loader />} />
       <Route path='/checkout' element={<Checkout />}/>
       <Route path='*' element={<Error />}></Route>
     </Routes>
 
 </CarritoProvider>
+<ToastContainer />
 </BrowserRouter>
 
     </>

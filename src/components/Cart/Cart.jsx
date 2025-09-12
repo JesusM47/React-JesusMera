@@ -20,7 +20,7 @@ export const Cart = () => {
   return (
     <div>
         {
-            carrito.map(producto => <CardItem key={producto.id} {...producto}/>)
+            carrito.map(producto => <CardItem key={producto.item.id} {...producto}/>)
         }
         <h3>Total: ${total}</h3>
         <h3>Cantidad Total: {cantidadTotal}</h3>
