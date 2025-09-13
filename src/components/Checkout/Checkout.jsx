@@ -121,6 +121,7 @@ export const Checkout = () => {
             </div>
             {
                 error && <p  className="error-msg">{error}</p>
+                
             }
 
             <button className="btn-confirmar" type="submit">Confirmar Compra</button>
