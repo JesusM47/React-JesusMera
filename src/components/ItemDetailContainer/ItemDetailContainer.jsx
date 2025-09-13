@@ -19,9 +19,9 @@ export const ItemDetailContainer = () => {
       getDoc(nuevoDoc)
         .then(res => {
           const data = res.data()
-          console.log(data)
+          
           const nuevosLibros = {id: res.id, ...data}
-          console.log(nuevosLibros)
+         
           setLibro(nuevosLibros)
         })
         .catch(error => console.log(error))
