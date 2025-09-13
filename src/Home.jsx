@@ -10,7 +10,7 @@ import { CardItem } from './components/CardItem/CardItem'
 import { Cart } from './components/Cart/Cart'
 import { Checkout } from './components/Checkout/Checkout'
 import { ToastContainer } from 'react-toastify'
-import { Loader } from './components/Loader/Loader'
+import Loader  from './components/Loader/Loader'
 
 const App = () => {
 

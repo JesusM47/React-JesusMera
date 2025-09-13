@@ -3,6 +3,8 @@ import { CarritoContext } from "../../context/CarritoContext"
 import { Link } from "react-router-dom"
 import { CardItem } from "../CardItem/CardItem"
 
+import './Cart.css'
+
 
 export const Cart = () => {
 
@@ -18,14 +20,29 @@ export const Cart = () => {
     }
 
   return (
-    <div>
-        {
-            carrito.map(producto => <CardItem key={producto.item.id} {...producto}/>)
-        }
-        <h3>Total: ${total}</h3>
-        <h3>Cantidad Total: {cantidadTotal}</h3>
-        <button onClick={() => vaciarCarrito()}>Vaciar Carrito</button>
-        <Link to="/checkout">Finalizar Compra</Link>
-    </div>
+
+<div className="resumen-compra">
+  {
+    carrito.map(producto => (
+      <CardItem key={producto.item.id} {...producto}/>
+    ))
+  }
+
+  <div className="resumen-detalles">
+    <h3>Total: ${total}</h3>
+    <h3>Cantidad Total: {cantidadTotal}</h3>
+  </div>
+
+  <div className="resumen-botones">
+    <button className="btn-vaciar" onClick={() => vaciarCarrito()}>
+      Vaciar Carrito
+    </button>
+    <Link className="btn-finalizar" to="/checkout">
+      Finalizar Compra
+    </Link>
+  </div>
+</div>
+
+
   )
 }

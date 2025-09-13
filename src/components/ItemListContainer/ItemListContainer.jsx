@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom"
 
 import { db } from "../../services/config"
 import { collection,getDocs, query, where } from "firebase/firestore"
-import { Loader } from "../Loader/Loader"
+import  Loader  from "../Loader/Loader"
 
 
 
@@ -34,32 +34,13 @@ import { Loader } from "../Loader/Loader"
       })
       .catch(error => console.log(error))
       .finally(() => {
-        console.log("Proceso Terminado")
         setLoading(false)
       })
   },[idCategoria])
 
-
-
-  // useEffect(() => {
- 
-  //   const funcionLibros = idCategoria ? getLibrosCategoria : getLibros
-
-  //   funcionLibros(idCategoria)
-  //     .then(res =>  setLibros(res))
-
-  //   // getLibros()
-  //   // .then (respusta => setLibros(respusta))
-  //   // .catch(error => console.log(error))
-  // },[idCategoria])
-
-  // console.log(libros)
-
-  
-
   return (
       <>
-    
+          <h2 style={{ textAlign: "center" }}>Mis Libros</h2>
           {loading ? <Loader /> : <ItemList libros={libros} /> }
           
        
