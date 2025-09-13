@@ -5,6 +5,8 @@ import { CarritoContext} from "../../context/CarritoContext"
 import { db } from "../../services/config"
 import { collection, addDoc, updateDoc, doc, getDoc } from "firebase/firestore"
 
+import './Checkout.css'
+
 export const Checkout = () => {
 
     const [nombre, setNombre] = useState("")
@@ -87,44 +89,44 @@ export const Checkout = () => {
     }
 
   return (
-    <div>
+    <div className="checkout-container">
         <h2>Checkout</h2>
 
-        <form onSubmit={manejadorFormulario}>
+        <form className="checkout-form" onSubmit={manejadorFormulario}>
             {carrito.map(libro => (
-                <div key={libro.item.id}>
+                <div className="checkout-item" key={libro.item.id}>
                     <p>{libro.item.nombre} X {libro.cantidad}</p>
                     <p>{libro.item.precio}</p>
                 </div>
             ))}
-            <div>
+            <div className="form-group">
                 <label htmlFor="">Nombre</label>
                 <input type="text" onChange={(e) => setNombre(e.target.value)}/>
             </div>
-            <div>
+            <div className="form-group">
                 <label htmlFor="">Apellido</label>
                 <input type="text" onChange={(e) => setApellido(e.target.value)}/>
             </div>
-            <div>
+            <div className="form-group">
                 <label htmlFor="">Teléfono</label>
                 <input type="number" onChange={(e) => setTelefono(e.target.value)}/>
             </div>
-            <div>
+            <div className="form-group">
                 <label htmlFor="">Email</label>
                 <input type="email" onChange={(e) => setEmail(e.target.value)}/>
             </div>
-            <div>
+            <div className="form-group">
                 <label htmlFor="">EmailConfirm</label>
                 <input type="email" onChange={(e) => setEmailConfirm(e.target.value)}/>
             </div>
             {
-                error && <p style={{color: "red"}}>{error}</p>
+                error && <p  className="error-msg">{error}</p>
             }
 
-            <button type="submit">Confirmar Compra</button>
+            <button className="btn-confirmar" type="submit">Confirmar Compra</button>
             {
                 ordenId && (
-                    <strong>Gracias por tu compra!! Tu numero de orden es: {ordenId}</strong>
+                    <strong className="orden-msg">Gracias por tu compra!! Tu numero de orden es: {ordenId}</strong>
                 )
             }
 
